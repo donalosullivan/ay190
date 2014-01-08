@@ -14,7 +14,7 @@ archivePrefix = "arXiv",
    adsurl = {http://adsabs.harvard.edu/abs/2013ApJ...762..126O},
 }
 
-@ARTICLE{nixon:14,
+@ARTICLE{nixon:14
    author = {{Nixon}, C. and {Salvesen}, G.},
     title = "{A physical model for state transitions in black hole X-ray binaries}",
   journal = {\mnras},

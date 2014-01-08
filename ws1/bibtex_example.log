@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.1.8)  8 JAN 2014 14:21
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.1.8)  8 JAN 2014 14:32
 entering extended mode
  %&-line parsing enabled.
 **bibtex_example.tex
@@ -267,10 +267,10 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 (./bibtex_example.aux) ) 
 Here is how much of TeX's memory you used:
- 2970 strings out of 493848
- 35216 string characters out of 1152824
- 92499 words of memory out of 3000000
- 6230 multiletter control sequences out of 15000+50000
+ 2971 strings out of 493848
+ 35226 string characters out of 1152824
+ 92502 words of memory out of 3000000
+ 6231 multiletter control sequences out of 15000+50000
  10923 words of font info for 24 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  27i,5n,35p,210b,136s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -278,7 +278,7 @@ Here is how much of TeX's memory you used:
 /usr/share/texmf-texlive/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texmf-
 texlive/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-texlive/fonts/typ
 e1/urw/palatino/uplri8a.pfb>
-Output written on bibtex_example.pdf (1 page, 41266 bytes).
+Output written on bibtex_example.pdf (1 page, 43814 bytes).
 PDF statistics:
  19 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
