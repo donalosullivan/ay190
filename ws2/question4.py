@@ -78,11 +78,11 @@ def pw_lin(x,x_,y_):
 def pw_quad(x,x_,y_):
     a,b,c = getinterval2(x,x_)
     if a==-1: return y_[b] #special case, x is a data point
-    x1,x2,x3 = x_[a],x_[b],x_[c]
-    f1,f2,f3 = y_[a],y_[b],y_[c]
-    result = (((x-x2)*(x-x3))/((x1-x2)*(x1-x3)))*f1
-    result += (((x-x1)*(x-x3))/((x2-x1)*(x2-x3)))*f2
-    result += (((x-x1)*(x-x2))/((x3-x1)*(x3-x2)))*f3
+    x0,x1,x2 = x_[a],x_[b],x_[c]
+    f0,f1,f2 = y_[a],y_[b],y_[c]
+    result = (((x-x1)*(x-x2))/((x0-x1)*(x0-x2)))*f0
+    result += (((x-x0)*(x-x2))/((x1-x0)*(x1-x2)))*f1
+    result += (((x-x0)*(x-x1))/((x2-x0)*(x2-x1)))*f2
     return result
     
 time = np.array([0.0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.0])
@@ -95,17 +95,17 @@ for xi in x: p_pwlin.append(pw_lin(xi,time,appmag))
 p_pwquad = []
 for xi in x: p_pwquad.append(pw_quad(xi,time,appmag))
 
-
+fs=24
 plt.figure()
 plt.plot(x,p_,'g-',label="n=8 Lagrange")
-plt.xlabel("time (days)")
-plt.ylabel("apparent magnitude")
+plt.xlabel("time (days)",fontsize=fs)
+plt.ylabel("apparent magnitude",fontsize=fs)
 
 plt.plot(x,p_pwlin,'r-',label="Piecewise Linear")
 plt.plot(x,p_pwquad,'b-',label="Piecewise Quadratic")
 plt.plot(time,appmag,'go',label="data")
-plt.legend()
-plt.show()
+plt.legend(loc=9)
+plt.savefig("question4fig.png")
 
 
 

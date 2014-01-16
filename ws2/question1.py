@@ -27,11 +27,10 @@ for n in range(2,16):
 	print "%10i"%n,"%6.3E" % abs_err,"%6.3E" % rel_err
 
 plt.figure()
-plt.title("Error in recurrence relation")
-plt.plot(X,absolute_err,label="Abolute")
+plt.plot(X,absolute_err,label="Absolute")
 plt.plot(X,relative_err,label="Relative")
-plt.ylabel("Log (Error magnitude)")
-plt.xlabel("n")
+plt.ylabel("Log (Error magnitude)",fontsize=24)
+plt.xlabel("n",fontsize=24)
 plt.legend()
 plt.savefig("error_plot.png")
 plt.show()
