@@ -1,0 +1,24 @@
+Anatomy of SPH code
+
+1 - set up domain, distribute particles
+2 - set up the problems
+3 - compute "mass" of each particle, m = dx*rho
+4 - search for neighbours, store them for each i
+5 - get initial timestep dt = CFL * h/max(Cs)
+
+6 Time Integration
+-6.1 Get PI_ij_n (artificial viscosity)
+-6.2 Get a_i (accelerations)
+-6.3 Update velocities vi(n+0.5) = vi(n-0.5)+dt*ai(n)
+-6.4 Get dE/dt(n+0.5)
+-6.5 update E(n+1) = E(n) + dt*(dE/dt(n+0.5))
+-6.6 Update r(n+1) = r(n) + dt*v(n+0.5)
+-6.7 Compute v(n+1) = v(n+0.5)+0.5*dt*a(n)
+-6.8 Update neighbours
+-6.9 Update rho,P,Cs--> calculate dt = CFL*h/max(Cs)
+
+W(r,h) = (2/3)*(1/h)*{  1 - (3/2)u**2 + (3/4)u**3  --- 0 <=u<1
+                        (1/4)(2-u)**3  ---- 1<=u<2
+                        0             ---- u>2
+                     }
+                     u = r/h
