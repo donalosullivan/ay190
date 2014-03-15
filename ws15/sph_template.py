@@ -23,11 +23,11 @@ def smoothing_kernel(r,h):
     invh = 1.0/h
     u = r*invh
     alphaD = twothirds * invh
-    q = 0.5*u
+
     if u >= 0.0 and u < 1.0:
-        return 1 - 6*q**2 + 6*q**3
+        return alphaD*(1 - (3.0/2.0)*u**2 + (3.0/4.0)*u**3)
     elif u < 2.0:
-        return 2*(1-q)**3
+        return alphaD*(1.0/4.0)*(2-u)**3
     else:
         return 0.0
 
@@ -114,8 +114,7 @@ def get_accels(r,m,p,rho,av,h,n,neibs,nneibs):
             #Gravity - viscosity
             fi,fj = 1.,1.
             diWij = dsmoothing_kernel_rij(rij,h)    
-            accels[i] -= m[jj]*(fi*diWij*p[i]/rho[i]**2 + fj*diWij*p[j]/rho[j]**2)\
-                         - m[jj]*av[i,jj]*dsmoothing_kernel_rij(rij,h)
+            accels[i] -= m[jj]*(p[i]/rho[i]**2 + p[jj]/rho[jj]**2 + av[i,jj])*dsmoothing_kernel_rij(rij,h)
 
     return accels
                                    
@@ -130,7 +129,7 @@ def get_energyRHS(r,m,p,rho,v,av,h,n,neibs,nneibs):
             jj = neibs[i,j]
             rij = r[i]-r[jj]
             vij = v[i]-v[jj]
-            epsrhs[i] += 0.5*m[jj]*(p[i]/rho[i]**2 + p[j]/rho[j]**2 + av[i,jj])*vij*dsmoothing_kernel_rij(rij,h)
+            epsrhs[i] += 0.5*m[jj]*(p[i]/rho[i]**2 + p[jj]/rho[jj]**2 + av[i,jj])*vij*dsmoothing_kernel_rij(rij,h)
 
     return epsrhs
 
@@ -150,6 +149,7 @@ def set_bcs(y,nghost,value):
 
     return y
 
+        
 #############################################
 # Main code
 # keep it simple, use numpy arrays for everything
@@ -203,7 +203,7 @@ dt = get_dt(h,cs,odt,cfl)
 # set time to zero
 time = 0.0
 # end after ntmax timesteps
-ntmax = 100
+ntmax = 200
 
 print 0, time, dt
 
@@ -225,7 +225,7 @@ for nt in range(1,ntmax):
 
     # get epsrhs
     epsrhs = get_energyRHS(r,m,press,rho,vh,av,h,n,neibs,nneibs)
-    epsrhos = set_bcs(epsrhs,nghost,0.0)
+    epsrhs = set_bcs(epsrhs,nghost,0.0)
 
     # update eps
     eps = eps + dt*epsrhs
@@ -248,21 +248,22 @@ for nt in range(1,ntmax):
     dt = get_dt(h,cs,odt,cfl)
 
     # do some output
-    if nt == 1 or nt % 5 == 0:
+    if time%0.01<0.001:
         mpl.clf()
         mpl.plot(r[nghost:len(rho)-nghost],rho[nghost:len(rho)-nghost],"+")
         mpl.draw()
-        
-        fname = "out_%04d.dat" % (nt)
+        time_str = str(time)[0:5]
+        fname = "out_%s.dat" % (time_str)
         outfile = open(fname,"w")
         for i in range(n):
             outstring = "%6d %15.6E %15.6E %15.6E %15.6E \n" % \
                         (i,r[i],rho[i],press[i],v[i])
             outfile.write(outstring)
         outfile.close()
-            
+        print "Written to %s" %fname  
 
     time = time + dt
+    if time > 0.2: break #cut off at t=0.2
     print nt, time, dt
 
 mpl.ioff()    
