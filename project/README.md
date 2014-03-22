@@ -15,24 +15,24 @@ These observations have been made at a wavelength of 1cm (with an infinitesimall
 
 <h2>Data Structures</h2>
 
-<i>'pos'</i> - Antenna Positions <br />
+<h3><b><i>'pos'</i> - Antenna Positions</b></h3> <br />
     pos( (i,x,y) )<br /> 
         i is the antenna number, x and y are cartesian coordinates<br /> 
         -->i,x,y = pos(0) would unpack the number and position of the first antenna<br /> 
 
-<i>'vis'</i> - Positions and Visibilities <br />
+<h3><b><i>'vis'</i> - Positions and Visibilities</b></h3> <br />
     vis( (i,j,A,phi) )<br /> 
         i and j are indices of the two antennae in 'pos', <br /> 
         A is amplitude,<br /> 
         phi is phase <br /> 
     
-<i>'uvvis'</i> - Baselines and Visibilities <br />
+<h3><b><i>'uvvis'</i> - Baselines and Visibilities </b></h3><br />
     uvvis( (u,v,A,phi) )<br /> 
         for each row in 'vis', 'uvvis' stores:<br /> 
             u,v - the baseline vectors (x2-x1) and (y2-y1) of antennae i and j<br /> 
             A,phi - the same visibility as in 'vis'<br /> 
 
-<i>'l' and 'm'</i> - RA and DEC grids <br />
+<h3><b><i>'l' and 'm'</i> - RA and DEC grids</b> </h3><br />
     These 1D arrays are grids of RA and DEC ranging from -100'' to +100''<br /> 
     Centered on zenith<br /> 
 
@@ -40,26 +40,26 @@ These observations have been made at a wavelength of 1cm (with an infinitesimall
 
 <h2>Methods</h2>
 
-<b>A(l,m,sig=arcmin)</b><br />
+<h3><b>A(l,m,sig=arcmin)</b></h3><br />
 Gaussian function for Antenna Beam A(l,m)<br /> 
 
-<b>DFT_rhs(uvvis,_l,_m)</b><br />
+<h3><b>DFT_rhs(uvvis,_l,_m)</b></h3><br />
 RHS function for Discrete FT: Sum over (u,v)<br />
    
     
-<b>DFT(uvvis,L,M)</b><br />
+<h3><b>DFT(uvvis,L,M)</b></h3><br />
 Returns intensity array I(l,m) using DFT_rhs<br />
     
     
-<b>find_nearest_gridpoint(x,xlist)</b><br />
+<h3><b>find_nearest_gridpoint(x,xlist)</b></h3><br />
 Takes a measured (u,v) point and locates the nearest (u,v) point on an evenly spaced grid<br />
     
 
-<b>uv_grid(uvvis,ugrid,vgrid)</b><br />
+<h3><b>uv_grid(uvvis,ugrid,vgrid)</b></h3><br />
 Create an evenly spaced grid of visibilities to use in an inverse fft<br />
   
 
-<b>def get_selection(pos,vis,N,orderby='asc')</b><br />
+<h3><b>def get_selection(pos,vis,N,orderby='asc')</b></h3><br />
 Return indices of rows in uvvis which only use N closest/farthest antennae<br />
 
 
