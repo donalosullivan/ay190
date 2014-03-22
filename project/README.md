@@ -15,24 +15,24 @@ These observations have been made at a wavelength of 1cm (with an infinitesimall
 
 <h2>Data Structures</h2>
 
-<h3><b><i>'pos'</i> - Antenna Positions</b></h3> <br />
+<h3><b><i>'pos'</i> - Antenna Positions</b></h3>
     pos( (i,x,y) )<br /> 
         i is the antenna number, x and y are cartesian coordinates<br /> 
         -->i,x,y = pos(0) would unpack the number and position of the first antenna<br /> 
 
-<h3><b><i>'vis'</i> - Positions and Visibilities</b></h3> <br />
+<h3><b><i>'vis'</i> - Positions and Visibilities</b></h3>
     vis( (i,j,A,phi) )<br /> 
         i and j are indices of the two antennae in 'pos', <br /> 
         A is amplitude,<br /> 
         phi is phase <br /> 
     
-<h3><b><i>'uvvis'</i> - Baselines and Visibilities </b></h3><br />
+<h3><b><i>'uvvis'</i> - Baselines and Visibilities </b></h3>
     uvvis( (u,v,A,phi) )<br /> 
         for each row in 'vis', 'uvvis' stores:<br /> 
             u,v - the baseline vectors (x2-x1) and (y2-y1) of antennae i and j<br /> 
             A,phi - the same visibility as in 'vis'<br /> 
 
-<h3><b><i>'l' and 'm'</i> - RA and DEC grids</b> </h3><br />
+<h3><b><i>'l' and 'm'</i> - RA and DEC grids</b> </h3>
     These 1D arrays are grids of RA and DEC ranging from -100'' to +100''<br /> 
     Centered on zenith<br /> 
 
@@ -40,14 +40,14 @@ These observations have been made at a wavelength of 1cm (with an infinitesimall
 
 <h2>Methods</h2>
 
-<h3><b>A(l,m,sig=arcmin)</b></h3><br />
+<h3><b>A(l,m,sig=arcmin)</b></h3>
 Gaussian function for Antenna Beam A(l,m)<br /> 
 
-<h3><b>DFT_rhs(uvvis,_l,_m)</b></h3><br />
+<h3><b>DFT_rhs(uvvis,_l,_m)</b></h3>
 RHS function for Discrete FT: Sum over (u,v)<br />
    
     
-<h3><b>DFT(uvvis,L,M)</b></h3><br />
+<h3><b>DFT(uvvis,L,M)</b></h3>
 Returns intensity array I(l,m) using DFT_rhs<br />
     
     
