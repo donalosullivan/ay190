@@ -16,25 +16,25 @@ These observations have been made at a wavelength of 1cm (with an infinitesimall
 <h2>Data Structures</h2>
 
 <i>'pos'</i> - Antenna Positions <br />
-    pos( (i,x,y) )
-        i is the antenna number, x and y are cartesian coordinates
-        -->i,x,y = pos(0) would unpack the number and position of the first antenna
+    pos( (i,x,y) )<br /> 
+        i is the antenna number, x and y are cartesian coordinates<br /> 
+        -->i,x,y = pos(0) would unpack the number and position of the first antenna<br /> 
 
 <i>'vis'</i> - Positions and Visibilities <br />
-    vis( (i,j,A,phi) )
-        i and j are indices of the two antennae in 'pos', 
-        A is amplitude,
-        phi is phase
+    vis( (i,j,A,phi) )<br /> 
+        i and j are indices of the two antennae in 'pos', <br /> 
+        A is amplitude,<br /> 
+        phi is phase <br /> 
     
 <i>'uvvis'</i> - Baselines and Visibilities <br />
-    uvvis( (u,v,A,phi) )
-        for each row in 'vis', 'uvvis' stores:
-            u,v - the baseline vectors (x2-x1) and (y2-y1) of antennae i and j
-            A,phi - the same visibility as in 'vis'
+    uvvis( (u,v,A,phi) )<br /> 
+        for each row in 'vis', 'uvvis' stores:<br /> 
+            u,v - the baseline vectors (x2-x1) and (y2-y1) of antennae i and j<br /> 
+            A,phi - the same visibility as in 'vis'<br /> 
 
 <i>'l' and 'm'</i> - RA and DEC grids <br />
-    These 1D arrays are grids of RA and DEC ranging from -100'' to +100''
-    Centered on zenith
+    These 1D arrays are grids of RA and DEC ranging from -100'' to +100''<br /> 
+    Centered on zenith<br /> 
 
 
 
