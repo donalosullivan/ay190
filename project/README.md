@@ -1,16 +1,16 @@
 <h1>Project Description</h1>
 
 <p>
-This 'Ay190: Computational Astrophysics' project takes visibilities from a radio interferometry array and constructs an image of the source using both a Discrete Fourier Transform method and NumPy's Fast Fourier Transform method.
+This <i>Ay190: Computational Astrophysics'</i> project takes visibilities from a radio interferometry array and constructs an image of the source using both a Discrete Fourier Transform method and NumPy's Fast Fourier Transform method.
 </p>
 
 <h1>Input Files</h1>
 
 <i>'AntennaPositions.csv'</i> - This is a text file that contains the position (of each antenna) measured in centimeters. This first column gives the antenna number, the second column gives the x-position of the antenna, and the final column gives the y-position of the antenna.
 
-<i>'Visibilities.csv' - This file gives the visibilities measured by the radio interferometer. These visibilities have no thermal noise and are perfectly phase-calibrated (but they are not flux-calibrated so the amplitude is meaningless). The first two columns define the antennas that the visibility was measured between (for example, 2 and 17 indicates that the visibility was measured between antennas 2 and 17). The final two columns give the amplitude and phase of the visibility respectively (the complex visibility is then amplitude*exp(i*phase) ).
+<i>'Visibilities.csv'</i> - This file gives the visibilities measured by the radio interferometer. These visibilities have no thermal noise and are perfectly phase-calibrated (but they are not flux-calibrated so the amplitude is meaningless). The first two columns define the antennas that the visibility was measured between (for example, 2 and 17 indicates that the visibility was measured between antennas 2 and 17). The final two columns give the amplitude and phase of the visibility respectively (the complex visibility is then amplitude*exp(i*phase) ).
 
-<i>These observations have been made at a wavelength of 1cm (with an infinitesimally small bandpass filter so that there is no bandwidth smearing). Additionally, the source is located directly overhead at the zenith (so there are no projection effects), and the beam of each antenna is Gaussian with sigma=1 arcminute. The integration time is too small for the rotation of the Earth to have any impact on the source's position in the sky.
+These observations have been made at a wavelength of 1cm (with an infinitesimally small bandpass filter so that there is no bandwidth smearing). Additionally, the source is located directly overhead at the zenith (so there are no projection effects), and the beam of each antenna is Gaussian with sigma=1 arcminute. The integration time is too small for the rotation of the Earth to have any impact on the source's position in the sky.
 
 
 <h2>Data Structures<h2>
@@ -40,23 +40,28 @@ This 'Ay190: Computational Astrophysics' project takes visibilities from a radio
 
 #Methods
 
-Gaussian function for Antenna Beam A(l,m)
-    def A(l,m,sig=arcmin)
+<b>A(l,m,sig=arcmin)</b><br />
+Gaussian function for Antenna Beam A(l,m)<br /> 
 
-RHS function for Discrete FT: Sum over (u,v)
-    def DFT_rhs(uvvis,_l,_m)
- 
-Returns intensity array I(l,m) using DFT_rhs
-    def DFT(uvvis,L,M)
+<b>DFT_rhs(uvvis,_l,_m)</b><br />
+RHS function for Discrete FT: Sum over (u,v)<br />
+   
+    
+<b>DFT(uvvis,L,M)</b><br />
+Returns intensity array I(l,m) using DFT_rhs<br />
+    
+    
+<b>find_nearest_gridpoint(x,xlist)</b><br />
+Takes a measured (u,v) point and locates the nearest (u,v) point on an evenly spaced grid<br />
+    
 
-Takes a measured (u,v) point and locates the nearest (u,v) point on an evenly spaced grid
-    def find_nearest_gridpoint(x,xlist)
+<b>uv_grid(uvvis,ugrid,vgrid)</b><br />
+Create an evenly spaced grid of visibilities to use in an inverse fft<br />
+  
 
-Create an evenly spaced grid of visibilities to use in an inverse fft
-    def uv_grid(uvvis,ugrid,vgrid)
- 
-Return indices of rows in uvvis which only use N closest/farthest antennae
-    def get_selection(pos,vis,N,orderby='asc')
+<b>def get_selection(pos,vis,N,orderby='asc')</b><br />
+Return indices of rows in uvvis which only use N closest/farthest antennae<br />
+
 
 
 
