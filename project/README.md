@@ -1,10 +1,10 @@
-<h1>Project Description</h1>
+<h2>Project Description</h2>
 
 <p>
 This <i>Ay190: Computational Astrophysics'</i> project takes visibilities from a radio interferometry array and constructs an image of the source using both a Discrete Fourier Transform method and NumPy's Fast Fourier Transform method.
 </p>
 
-<h1>Input Files</h1>
+<h2>Input Files</h2>
 
 <i>'AntennaPositions.csv'</i> - This is a text file that contains the position (of each antenna) measured in centimeters. This first column gives the antenna number, the second column gives the x-position of the antenna, and the final column gives the y-position of the antenna.
 
@@ -13,7 +13,7 @@ This <i>Ay190: Computational Astrophysics'</i> project takes visibilities from a
 These observations have been made at a wavelength of 1cm (with an infinitesimally small bandpass filter so that there is no bandwidth smearing). Additionally, the source is located directly overhead at the zenith (so there are no projection effects), and the beam of each antenna is Gaussian with sigma=1 arcminute. The integration time is too small for the rotation of the Earth to have any impact on the source's position in the sky.
 
 
-<h2>Data Structures<h2>
+<h2>Data Structures</h2>
 
 <i>'pos'</i> - Antenna Positions <br />
     pos( (i,x,y) )
@@ -38,7 +38,7 @@ These observations have been made at a wavelength of 1cm (with an infinitesimall
 
 
 
-#Methods
+<h2>Methods</h2>
 
 <b>A(l,m,sig=arcmin)</b><br />
 Gaussian function for Antenna Beam A(l,m)<br /> 
