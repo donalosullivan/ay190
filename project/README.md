@@ -51,15 +51,15 @@ RHS function for Discrete FT: Sum over (u,v)<br />
 Returns intensity array I(l,m) using DFT_rhs<br />
     
     
-<h3><b>find_nearest_gridpoint(x,xlist)</b></h3><br />
+<h3><b>find_nearest_gridpoint(x,xlist)</b></h3>
 Takes a measured (u,v) point and locates the nearest (u,v) point on an evenly spaced grid<br />
     
 
-<h3><b>uv_grid(uvvis,ugrid,vgrid)</b></h3><br />
+<h3><b>uv_grid(uvvis,ugrid,vgrid)</b></h3>
 Create an evenly spaced grid of visibilities to use in an inverse fft<br />
   
 
-<h3><b>def get_selection(pos,vis,N,orderby='asc')</b></h3><br />
+<h3><b>def get_selection(pos,vis,N,orderby='asc')</b></h3>
 Return indices of rows in uvvis which only use N closest/farthest antennae<br />
 
 
