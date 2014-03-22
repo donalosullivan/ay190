@@ -25,9 +25,9 @@ def smoothing_kernel(r,h):
     alphaD = twothirds * invh
     q = 0.5*u
     if u >= 0.0 and u < 1.0:
-        return 1 - 6*q**2 + 6*q**3
+        return (8/np.pi)*(1 - 6*q**2 + 6*q**3)
     elif u < 2.0:
-        return 2*(1-q)**3
+        return (8/np.pi)*(2*(1-q)**3)
     else:
         return 0.0
 
@@ -111,11 +111,11 @@ def get_accels(r,m,p,rho,av,h,n,neibs,nneibs):
         for j in range(nneibs[i]):
             jj = neibs[i,j]
             rij = r[i]-r[jj]
-            #Gravity - viscosity
-            fi,fj = 1.,1.
+            
+            fi,fj = 1.0,1.0
             diWij = dsmoothing_kernel_rij(rij,h)    
-            accels[i] -= m[jj]*(fi*diWij*p[i]/rho[i]**2 + fj*diWij*p[j]/rho[j]**2)\
-                         - m[jj]*av[i,jj]*dsmoothing_kernel_rij(rij,h)
+            accels[i] -= m[jj]*diWij*(fi*p[i]/rho[i]**2 + fi*p[j]/rho[j]**2) #momentum eq RHS
+            accels[i] -= m[jj]*av[i,jj]*diWij #artificial viscosity term
 
     return accels
                                    
@@ -130,7 +130,7 @@ def get_energyRHS(r,m,p,rho,v,av,h,n,neibs,nneibs):
             jj = neibs[i,j]
             rij = r[i]-r[jj]
             vij = v[i]-v[jj]
-            epsrhs[i] += 0.5*m[jj]*(p[i]/rho[i]**2 + p[j]/rho[j]**2 + av[i,jj])*vij*dsmoothing_kernel_rij(rij,h)
+            epsrhs[i] += 0.5*m[jj]*(p[i]/(rho[i]**2) + p[j]/(rho[j]**2) + av[i,jj])*vij*dsmoothing_kernel_rij(rij,h)
 
     return epsrhs
 
@@ -220,6 +220,7 @@ for nt in range(1,ntmax):
     accels = get_accels(r,m,press,rho,av,h,n,neibs,nneibs)
     accels = set_bcs(accels,nghost,0.0)
 
+    
     # update vh from t-1/2dt to t+1/2dt
     vh = vh + dt * accels
 
@@ -227,6 +228,7 @@ for nt in range(1,ntmax):
     epsrhs = get_energyRHS(r,m,press,rho,vh,av,h,n,neibs,nneibs)
     epsrhos = set_bcs(epsrhs,nghost,0.0)
 
+    print epsrhs
     # update eps
     eps = eps + dt*epsrhs
 
@@ -243,6 +245,7 @@ for nt in range(1,ntmax):
     rho = get_density(r,h,m,n,neibs,nneibs)
     press = (gamma-1.0)*rho*eps
     cs2 = (gamma-1.0)*rho*eps + press/rho**2 * (gamma-1.0)*rho
+
     cs = np.sqrt(cs2)
     odt = dt
     dt = get_dt(h,cs,odt,cfl)
@@ -263,7 +266,9 @@ for nt in range(1,ntmax):
             
 
     time = time + dt
+
     print nt, time, dt
+    
 
 mpl.ioff()    
 mpl.plot(r,rho,"+")
